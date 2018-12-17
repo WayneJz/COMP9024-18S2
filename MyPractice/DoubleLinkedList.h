@@ -16,6 +16,7 @@ void insertNode(DNodeT*, int, DNodeT*);
 void editNode(DNodeT*, int, int);
 bool deleteNode(DNodeT*, int);
 bool deleteNodeByData(DNodeT*, int);
+void deleteDuplicateNode(DNodeT*);
 bool isSorted(DNodeT*);
 void swapNodeData(DNodeT*, DNodeT*);
 void bubbleSort(DNodeT*);

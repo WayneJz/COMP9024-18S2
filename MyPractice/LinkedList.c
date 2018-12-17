@@ -103,6 +103,25 @@ bool deleteNodeByData(NodeT *preExistNode, int indicatedData){
 }
 
 
+// Delete duplicated nodes (only reserve first-occurrence data node)
+void deleteDuplicateNode(NodeT *preExistNode){
+    NodeT *p = preExistNode;
+    while (p != NULL){
+        int currentData = p->data;
+        NodeT *dupCheck = p;
+        while (dupCheck->next != NULL){
+            if (dupCheck->next->data == currentData){
+                NodeT *toDelete = dupCheck->next;
+                dupCheck->next = dupCheck->next->next;
+                free(toDelete);
+            }
+            dupCheck = dupCheck->next;
+        }
+        p = p->next;
+    }
+}
+
+
 // Return true if the linked list is totally sorted
 bool isSorted(NodeT *allNode){
     NodeT *p = allNode;
@@ -169,10 +188,12 @@ void printNode(NodeT *allNode){
 
 // Release all nodes
 void dropNode(NodeT *allNode){
-    NodeT *p = allNode;
-    while (p != NULL){
-        NodeT *toDelete = p;
-        p = p->next;
-        free(toDelete);
+    printf("Nodes have been released:\n");
+    while (allNode != NULL){
+        NodeT *temp = allNode->next;
+        printf("%d ", allNode->data);
+        free(allNode);
+        allNode = temp;
     }
+    printf("\n");
 }

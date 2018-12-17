@@ -111,6 +111,26 @@ bool deleteNodeByData(DNodeT *preExistNode, int indicatedData){
 }
 
 
+// Delete duplicated nodes (only reserve first-occurrence data node)
+void deleteDuplicateNode(DNodeT *preExistNode){
+    DNodeT *p = preExistNode;
+    while (p != NULL){
+        int currentData = p->data;
+        DNodeT *dupCheck = p;
+        while (dupCheck->next != NULL){
+            if (dupCheck->next->data == currentData){
+                DNodeT *toDelete = dupCheck->next;
+                dupCheck->next = dupCheck->next->next;
+                dupCheck->next->previous = dupCheck;
+                free(toDelete);
+            }
+            dupCheck = dupCheck->next;
+        }
+        p = p->next;
+    }
+}
+
+
 // Return true if the linked list is totally sorted
 bool isSorted(DNodeT *allNode){
     DNodeT *p = allNode;
@@ -193,10 +213,12 @@ void reversePrint(DNodeT *allNode){
 
 // Release all nodes
 void dropNode(DNodeT *allNode){
-    DNodeT *p = allNode;
-    while (p != NULL){
-        DNodeT *toDelete = p;
-        p = p->next;
-        free(toDelete);
+    printf("Nodes have been released:\n");
+    while (allNode != NULL){
+        DNodeT *temp = allNode->next;
+        printf("%d ", allNode->data);
+        free(allNode);
+        allNode = temp;
     }
+    printf("\n");
 }
