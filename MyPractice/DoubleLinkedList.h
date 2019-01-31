@@ -18,7 +18,7 @@ bool deleteNode(DNodeT*, int);
 bool deleteNodeByData(DNodeT*, int);
 void deleteDuplicateNode(DNodeT*);
 bool isSorted(DNodeT*);
-void swapNodeData(DNodeT*, DNodeT*);
+void swapNode(DNodeT*, DNodeT*);
 void bubbleSort(DNodeT*);
 DNodeT *reverseNode(DNodeT*);
 void printNode(DNodeT*);

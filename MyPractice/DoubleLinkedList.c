@@ -30,12 +30,19 @@ void appendNode(DNodeT *preExistNode, DNodeT *newNode){
 
 
 // Append node into the head of the linked list
-void prependNode(DNodeT *preExistNode, DNodeT *newNode){
-    DNodeT *p = preExistNode;
-    newNode->next = p->next;    // newNode next points to the head's original next
-    newNode->previous = p;      // newNode previous points to the head
-    p->next->previous = newNode;    // original next's previous equals to newNode
-    p->next = newNode;      // change head's next to newNode
+/*
+    1. newNode next points to the head's original next
+    2. newNode previous points to the head
+    3. original next's (if exists) previous pointer points to newNode
+    4. change head's next to newNode
+*/
+void prependNode(DNodeT *head, DNodeT *newNode){
+    newNode->next = head->next;
+    newNode->previous = head;
+    if (head->next != NULL){
+        head->next->previous = newNode;
+    }
+    head->next = newNode;
 }
 
 
@@ -145,11 +152,27 @@ bool isSorted(DNodeT *allNode){
 
 
 // Swap data of two nodes (not actually swap the nodes)
-void swapNodeData(DNodeT *a, DNodeT *b){
+/*
+    HEAD <-> A <-> B <-> LAST
+
+    1. HEAD's next pointer points to B
+    2. A's next pointer points to LAST
+    3. B's previous pointer points to HEAD
+    4. LAST's (if exists) previous pointer points to A
+    5. B's next pointer points to A
+    6. A's previous pointer points to B
+*/
+
+void swapNode(DNodeT *a, DNodeT *b){
     assert(a != NULL && b != NULL);
-    int dataA = a->data;
-    a->data = b->data;
-    b->data = dataA;
+    a->previous->next = b;
+    a->next = b->next;
+    b->previous = a->previous;
+    if (b->next != NULL){
+        b->next->previous = a;
+    }
+    b->next = a;
+    a->previous = b;
 }
 
 
@@ -157,9 +180,9 @@ void swapNodeData(DNodeT *a, DNodeT *b){
 void bubbleSort(DNodeT *allNode){
     while (isSorted(allNode) == false){
         DNodeT *p = allNode;
-        while (p->next != NULL){
+        while (p != NULL && p->next != NULL){
             if (p->data > p->next->data){
-                swapNodeData(p, p->next);
+                swapNode(p, p->next);
             }
             p = p->next;
         }
