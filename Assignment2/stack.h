@@ -2,6 +2,8 @@
 
 typedef struct StackRep *stack;
 
+#define ENDTAG -1             // Used to initialize arrays, show the end of arrays
+
 stack newStack();             // set up empty stack
 void  dropStack(stack);       // remove unwanted stack
 int   StackIsEmpty(stack);    // check whether stack is empty

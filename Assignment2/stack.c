@@ -95,7 +95,7 @@ int * StackIterate(stack S){
     }
 
     // setting -1 as a symbol to indicate where the stack ends
-    element[i] = -1;
+    element[i] = ENDTAG;
     free(head);
     return element;
 }

@@ -29,7 +29,7 @@ void appendNode(DNodeT *preExistNode, DNodeT *newNode){
 }
 
 
-// Append node into the head of the linked list
+// Pre-Append node into the head of the linked list
 /*
     1. newNode next points to the head's original next
     2. newNode previous points to the head
@@ -43,6 +43,17 @@ void prependNode(DNodeT *head, DNodeT *newNode){
         head->next->previous = newNode;
     }
     head->next = newNode;
+}
+
+
+// Return the length of the linked list
+int length(DNodeT *preExistNode){
+    int len = 0;
+    while (preExistNode != NULL){
+        len += 1;
+        preExistNode = preExistNode->next;
+    }
+    return len;
 }
 
 
@@ -151,7 +162,7 @@ bool isSorted(DNodeT *allNode){
 }
 
 
-// Swap data of two nodes (not actually swap the nodes)
+// Swap two nodes
 /*
     HEAD <-> A <-> B <-> LAST
 
@@ -178,10 +189,12 @@ void swapNode(DNodeT *a, DNodeT *b){
 
 // Bubble sort implementation
 void bubbleSort(DNodeT *allNode){
-    while (isSorted(allNode) == false){
+    int i;
+    for (i = 0; i < length(allNode); i ++){
         DNodeT *p = allNode;
         while (p != NULL && p->next != NULL){
             if (p->data > p->next->data){
+                printf("swap %d %d\n", p->data, p->next->data);
                 swapNode(p, p->next);
             }
             p = p->next;

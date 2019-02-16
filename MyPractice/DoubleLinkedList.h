@@ -12,6 +12,7 @@ typedef struct DNode{
 DNodeT *createNode(int);
 void appendNode(DNodeT*, DNodeT*);
 void prependNode(DNodeT*, DNodeT*);
+int length(DNodeT*);
 void insertNode(DNodeT*, int, DNodeT*);
 void editNode(DNodeT*, int, int);
 bool deleteNode(DNodeT*, int);

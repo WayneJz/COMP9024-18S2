@@ -35,6 +35,17 @@ void prependNode(NodeT *preExistNode, NodeT *newNode){
 }
 
 
+// Return the length of the linked list
+int length(NodeT *preExistNode){
+    int len = 0;
+    while (preExistNode != NULL){
+        len += 1;
+        preExistNode = preExistNode->next;
+    }
+    return len;
+}
+
+
 // Insert node into the indicated position
 // if indicated index beyond the max index, append the node into the tail of the linked list
 void insertNode(NodeT *preExistNode, int index, NodeT *newNode){
@@ -135,22 +146,23 @@ bool isSorted(NodeT *allNode){
 }
 
 
-// Swap data of two nodes (not actually swap the nodes)
-void swapNodeData(NodeT *a, NodeT *b){
-    assert(a != NULL && b != NULL);
-    int dataA = a->data;
-    a->data = b->data;
-    b->data = dataA;
+// Swap two nodes
+void swapNode(NodeT *previous, NodeT *a, NodeT *b){
+    assert(previous != NULL && previous->next == a && a != NULL && b != NULL);
+    a->next = b->next;
+    b->next = a;
+    previous->next = b;
 }
 
 
 // Bubble sort implementation
 void bubbleSort(NodeT *allNode){
-    while (isSorted(allNode) == false){
+    int i;
+    for (i = 0; i < length(allNode); i ++){
         NodeT *p = allNode;
-        while (p->next != NULL){
-            if (p->data > p->next->data){
-                swapNodeData(p, p->next);
+        while (p != NULL && p->next != NULL && p->next->next != NULL){
+            if (p->next->data > p->next->next->data){
+                swapNode(p, p->next, p->next->next);
             }
             p = p->next;
         }
