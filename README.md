@@ -13,7 +13,7 @@ Lecturer: Michael Thielscher
 5. **Graph algorithms I** : Hamiltonian paths/circuits, Euler paths/circuits, directed graphs, transitive closure, PageRank...
 6. **Graph algorithms II** : Weighted graphs, minimum spanning tree algorithms (Kruskal, Prim), shortest path algorithms (Dijkstra, Floyd), flow network algorithms (Edmonds-Karp maxflow algorithm)
 7. **Search tree algorithms I** : Binary search tree (BST) data structure, tree insertion, deletion, rotation, partition...
-8. **Search tree algorithms II** : Self-adjusting trees (AVL, splay, 2-3-4, red-black)
+8. **Search tree algorithms II** : Self-adjusting trees (AVL, splay, 2-3-4, red-black tree)
 9. **String algorithms** : Pattern matching algorithms (Boyer-Moore, KMP), tries, text compression (Huffman code)
 10. **Approximation and randomised algorithms** : Approximation, randomised quicksort, Karger's algorithm, Simulation.
 
